@@ -22,7 +22,7 @@ public class Database {
                 System.out.printin("PostgreSQL connected");
             }
         } catch (SQLException e) {
-            System.out.println("Connection: " + connection);
+            System.out.println("Connection:  " + connection);
         }
         return connection;
     }
