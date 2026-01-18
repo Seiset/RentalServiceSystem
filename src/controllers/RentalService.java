@@ -75,4 +75,4 @@ public class RentalService  {
         ps.setInt(2, carId);
         ps.executeUpdate();
     }
-} alan loh
+} 
