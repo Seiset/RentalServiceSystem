@@ -14,3 +14,31 @@ public class Car {
         this.price = price;
         this.rented = status.equalsIgnoreCase("RENTED");
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
+
+    public String getStatus() {
+        return rented ? "RENTED" : "AVAILABLE";
+    }
