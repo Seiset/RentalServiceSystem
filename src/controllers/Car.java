@@ -42,3 +42,10 @@ public class Car {
     public String getStatus() {
         return rented ? "RENTED" : "AVAILABLE";
     }
+
+    @Override
+    public String toString() {
+        return id + " | " + brand + " | " + model + " | " + price + " | " +
+                (rented ? "RENTED" : "AVAILABLE");
+    }
+}
