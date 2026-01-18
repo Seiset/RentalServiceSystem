@@ -1,2 +1,1 @@
-//создайте переменные
-//установите getters and setters
+Alan ne loh/ zato Anel loh
