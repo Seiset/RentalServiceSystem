@@ -1,4 +1,4 @@
-package rositories;
+package repositories;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
