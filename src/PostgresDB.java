@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class PostgresDB implements IDB {
-    public POstgresDB(String host, String dbName, String user, String password) {
+    public PostgresDB(String host, String dbName, String user, String password) {
         try {
             String className;
             Class.forName( "org.postgresql.Driver");
