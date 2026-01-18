@@ -16,7 +16,7 @@ public class PostgresDB implements IDB {
             System.out.println("DB error: " + e.getMessage());}}
 
     @Override
-    public Connection getConnection() {
+    public Connection getСonnection() {
         return null;
     }
 
@@ -24,4 +24,4 @@ public class PostgresDB implements IDB {
     public void close() {
 
     }
-}      
+}
