@@ -19,7 +19,7 @@ public class Database {
         try {
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.printin("PostgreSQL connected");
+                System.out.println("PostgreSQL connected");
             }
         } catch (SQLException e) {
             System.out.println("Connection:  " + connection);
