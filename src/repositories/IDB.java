@@ -1,14 +1,14 @@
 package repositories;
 
-import java.SQL.Connection;
+import java.sql.Connection;
 
 public interface IDB {
-   static Connection getConnection() {
-      return null;
-   }
+    static Connection getConnection() {
+       return null;
+    }
 
-   Connection getConnection();
+    Connection getConnection();
 
-   void close();
+    void close();
 
 }
