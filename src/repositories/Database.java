@@ -27,6 +27,3 @@ public class Database {
       return connection;
    }
 }
-          
-  
-  //подключитте постгрес к датабазе и сделайте метод getconnection используя try catch (exceprtions)
