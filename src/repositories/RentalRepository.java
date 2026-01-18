@@ -1,0 +1,1 @@
+//create methods for succesful connection to rental
