@@ -17,13 +17,13 @@ public class Database {
    
     public static Connection getConnection() { 
         try {
-           if (connection == null || connection.isClosed()) {
-              connection = DriverManager.getConnection(URL, USER, PASSWORD);
-              System.out.printin("PostreSQL connected");
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                System.out.printin("PostreSQL connected");
             }
-      } catch (SQLException e) {
-         System.out.prinin("Connection: " + connection);
-      }
-      return connection;
-   }
+        } catch (SQLException e) {
+            System.out.prinin("Connection: " + connection);
+        }
+        return connection;
+    }
 }
