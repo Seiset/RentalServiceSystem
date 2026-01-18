@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 public interface IDB {
     static Connection getConnection() {
-       return null;
+        return null;
     }
 
     Connection getConnection();
