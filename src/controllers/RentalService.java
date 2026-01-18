@@ -48,7 +48,7 @@ public class RentalService  {
         }
     }
 
-    public List<Car> findAvailableCars() throws SQLException {
+    public List<Car> findAvailableCars() throws Exception {
         List<Car> cars = new ArrayList<>();
         String sql = "SELECT * FROM cars WHERE available = true";
 
@@ -68,7 +68,7 @@ public class RentalService  {
         return cars;
     }
 
-    public void updateAvailability(int carId, boolean status) throws SQLException {
+    public void updateAvailability(int carId, boolean status) throws Exception {
         String sql = "UPDATE cars SET available = ? WHERE id = ?";
         PreparedStatement ps = IDB.getConnection().prepareStatement(sql);
         ps.setBoolean(1, status);

@@ -14,8 +14,8 @@ public class Database {
     private static Connection connection;
 
     private Database() { }
-   
-    public static Connection getConnection() { 
+
+    public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);

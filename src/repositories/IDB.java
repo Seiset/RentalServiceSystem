@@ -7,7 +7,5 @@ public interface IDB {
         return null;
     }
 
-    Connection getConnection();
-
     void close();
 }

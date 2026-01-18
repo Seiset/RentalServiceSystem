@@ -15,7 +15,7 @@ public class PostgresDB implements IDB {
         } catch (Exception e) {
             System.out.println("DB error: " + e.getMessage());}}
 
-    @Override
+
     public Connection getСonnection() {
         return null;
     }
