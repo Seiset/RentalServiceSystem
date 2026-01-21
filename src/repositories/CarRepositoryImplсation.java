@@ -10,7 +10,6 @@ public class CarRepositoryImplсation implements CarRepository {
     private final Connection conn;
 
     public CarRepositoryImplсation() {
-        // Подключаемся к базе через Database.java
         conn = Database.getConnection();
     }
 
