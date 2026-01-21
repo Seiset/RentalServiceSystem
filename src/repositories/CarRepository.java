@@ -1,6 +1,6 @@
 package repositories;
 
-import controllers.Car;
+import models.Car;
 import java.util.List;
 
 public interface CarRepository {
