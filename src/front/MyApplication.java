@@ -29,6 +29,8 @@ public class MyApplication {
                 case 2 -> addCar();
                 case 3 -> updateCar();
                 case 4 -> deleteCar();
+                case 5 -> rentCarMenu();
+                case 6 -> returnCarMenu();
                 case 0 -> {
                     System.out.println("Bye!");
                     return;
@@ -44,6 +46,8 @@ public class MyApplication {
         System.out.println("2. Add new car");
         System.out.println("3. Update car");
         System.out.println("4. Delete car");
+        System.out.println("5. Rent a car");
+        System.out.println("6. Return a car");
         System.out.println("0. Exit");
         System.out.print("Choose option: ");
     }
@@ -121,5 +125,19 @@ public class MyApplication {
 
         carRepository.deleteCar(id);
         System.out.println("Car deleted.");
+    }
+
+    private void rentCarMenu() {
+        System.out.print("Enter car ID to rent: ");
+        int carId = sc.nextInt();
+        sc.nextLine();
+        rentalService.rentCar(carId);
+    }
+
+    private void returnCarMenu() {
+        System.out.print("Enter car ID to return: ");
+        int carId = sc.nextInt();
+        sc.nextLine();
+        rentalService.returnCar(carId);
     }
 }
