@@ -1,6 +1,6 @@
 package repositories;
 
-import controllers.Rental;
+import models.Rental;
 
 public interface RentalRepository {
     public void userId();

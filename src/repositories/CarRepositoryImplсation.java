@@ -1,15 +1,15 @@
 package repositories;
 
-import controllers.Car;
+import models.Car;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarRepositoryImpl implements CarRepository {
+public class CarRepositoryImplсation implements CarRepository {
 
     private final Connection conn;
 
-    public CarRepositoryImpl() {
+    public CarRepositoryImplсation() {
         // Подключаемся к базе через Database.java
         conn = Database.getConnection();
     }
