@@ -1,4 +1,10 @@
 package repositories;
 
+import models.User;
+import java.util.List;
+
 public interface UserRepository {
-}///we need three methods  User(should be void) findbyId getallUsers
+    void addUser(User user);
+    User findById(int id);
+    List<User> getAllUsers();
+}
