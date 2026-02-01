@@ -35,3 +35,31 @@ public class RoleManagement {
         return currentUser.getName() + " (" + currentUser.getRole() + ")";
     }
 
+    public boolean canAddCar() {
+        return hasRole(Role.ADMIN);
+    }
+
+    public boolean canUpdateCar() {
+        return hasRole(Role.ADMIN, Role.MANAGER);
+    }
+
+    public boolean canDeleteCar() {
+        return hasRole(Role.ADMIN);
+    }
+
+    public boolean canRentCar() {
+        return hasRole(Role.ADMIN, Role.USER);
+    }
+
+    public boolean canReturnCar() {
+        return hasRole(Role.ADMIN, Role.MANAGER);
+    }
+
+    public boolean canRegisterUser() {
+        return hasRole(Role.ADMIN, Role.MANAGER);
+    }
+
+    public boolean canViewFullRentalInfo() {
+        return hasRole(Role.ADMIN, Role.MANAGER);
+    }
+
