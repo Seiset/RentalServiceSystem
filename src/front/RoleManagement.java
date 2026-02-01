@@ -1,5 +1,14 @@
 package front;
 
+import models.Role;
+import models.User;
+import repositories.UserRepository;
+
 public class RoleManagement {
-}///
-/// using boolean methods make role permissions for rentalsevice carrepository methods
+
+    private User currentUser;
+    private final UserRepository userRepository;
+
+    public RoleManagement(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
