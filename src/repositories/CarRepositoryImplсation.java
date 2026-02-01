@@ -41,6 +41,7 @@ public class CarRepositoryImplсation implements CarRepository {
                         rs.getString("brand"),
                         rs.getString("model"),
                         rs.getDouble("price"),
+                        rs.getString("category"),
                         rs.getBoolean("rented") ? "RENTED" : "AVAILABLE"
                 ));
             }
@@ -62,7 +63,9 @@ public class CarRepositoryImplсation implements CarRepository {
                         rs.getString("brand"),
                         rs.getString("model"),
                         rs.getDouble("price"),
+                        rs.getString("category"),
                         rs.getBoolean("rented") ? "RENTED" : "AVAILABLE"
+
                 );
             }
         } catch (SQLException e) {

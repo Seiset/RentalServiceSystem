@@ -1,17 +1,16 @@
-
 package models;
 
 public class Rental {
     private int id;
+    private int userId;
     private int carId;
-    private String rentaltime;
-    private String exptime;
 
-    public Rental( String rentaltime,String exptime) {
-        this.rentaltime = rentaltime;
-        this.exptime=exptime;
+    public Rental(int id, int userId, int carId) {
+        this.id = id;
+        this.userId = userId;
+        this.carId = carId;
     }
 
-    public int getId() { return id; }
+    public int getUserId() { return userId; }
     public int getCarId() { return carId; }
 }

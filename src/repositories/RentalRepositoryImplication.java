@@ -50,5 +50,4 @@ public class RentalRepositoryImplication implements RentalRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-}
+    }}

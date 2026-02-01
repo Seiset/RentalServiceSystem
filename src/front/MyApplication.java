@@ -137,11 +137,11 @@ public class MyApplication {
 
     private void addCar() {
         System.out.print("Brand: ");
-           String brand = sc.nextLine();
+        String brand = sc.nextLine();
         System.out.print("Model: ");
-           String model = sc.nextLine();
+        String model = sc.nextLine();
         System.out.print("Price per day: ");
-           double price = sc.nextDouble(); sc.nextLine();
+        double price = sc.nextDouble(); sc.nextLine();
         if (price <= 0) { System.out.println("Price must be > 0"); return; }
         System.out.print("Category: "); String category = sc.nextLine();
 

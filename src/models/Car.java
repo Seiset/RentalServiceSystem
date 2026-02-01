@@ -7,12 +7,14 @@ public class Car {
     private String model;
     private double price;
     private boolean rented;
+    private String category;
 
-    public Car(int id, String brand, String model, double price, String status) {
+    public Car(int id, String brand, String model, double price, String category, String status) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.price = price;
+        this.category = category;
         this.rented = status.equalsIgnoreCase("RENTED");
     }
 
@@ -27,6 +29,7 @@ public class Car {
     public String getModel() {
         return model;
     }
+    public String getCategory() { return category; }
 
     public double getPrice() {
         return price;
