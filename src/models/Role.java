@@ -10,7 +10,7 @@ public enum Role {
         try {
             return Role.valueOf(roleStr.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return null; // or throw exception - depending on your needs
+            return null; 
         }
     }
 
