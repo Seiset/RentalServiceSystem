@@ -2,6 +2,7 @@ package front;
 
 import models.Car;
 import controllers.RentalService;
+import models.Rental;
 import repositories.CarRepository;
 
 import java.util.Scanner;
@@ -81,6 +82,8 @@ public class MyApplication {
 
         System.out.print("Status (AVAILABLE / RENTED): ");
         String status = sc.nextLine();
+        rentalService.rentalTime();
+
 
         Car car = new Car(0, brand, model, price, status);
         carRepository.addCar(car);

@@ -5,7 +5,7 @@ import repositories.CarRepositoryImplсation;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         CarRepository carRepository = new CarRepositoryImplсation();
         RentalService rentalService = new RentalService(carRepository);
