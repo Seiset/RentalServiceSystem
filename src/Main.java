@@ -1,16 +1,17 @@
 import front.MyApplication;
 import controllers.RentalService;
-import repositories.CarRepository;
-import repositories.CarRepositoryImplсation;
+import repositories.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
         CarRepository carRepository = new CarRepositoryImplсation();
-        RentalService rentalService = new RentalService(carRepository);
+        UserRepository userRepository = new UserRepositoryImplication();
+        RentalRepositoryImplication rentalRepository = new RentalRepositoryImplication();
 
-        MyApplication app = new MyApplication(carRepository, rentalService);
+        RentalService rentalService = new RentalService(carRepository, rentalRepository, userRepository);
+
+        MyApplication app = new MyApplication(carRepository, rentalService, userRepository);
         app.run();
     }
 }
