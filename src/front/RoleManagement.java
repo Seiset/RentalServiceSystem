@@ -12,3 +12,12 @@ public class RoleManagement {
     public RoleManagement(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public boolean login(int userId) {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            return false;
+        }
+        this.currentUser = user;
+        return true;
+    }
