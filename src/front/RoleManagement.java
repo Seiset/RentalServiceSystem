@@ -72,3 +72,32 @@ public class RoleManagement {
         return false;
     }
 
+    public boolean showAddCarOption() {
+        return canAddCar();
+    }
+
+    public boolean showUpdateCarOption() {
+        return canUpdateCar();
+    }
+
+    public boolean showDeleteCarOption() {
+        return canDeleteCar();
+    }
+
+    public boolean showRentCarOption() {
+        return canRentCar();
+    }
+
+    public boolean showReturnCarOption() {
+        return canReturnCar();
+    }
+
+    public boolean showRegisterUserOption() {
+        return canRegisterUser();
+    }
+
+    public boolean showFullRentalInfoOption() {
+        return canViewFullRentalInfo();
+    }
+}
+
