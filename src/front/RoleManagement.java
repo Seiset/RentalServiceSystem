@@ -21,3 +21,17 @@ public class RoleManagement {
         this.currentUser = user;
         return true;
     }
+
+    public boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public String getUserDisplay() {
+        if (!isLoggedIn()) return "Not logged in";
+        return currentUser.getName() + " (" + currentUser.getRole() + ")";
+    }
+
