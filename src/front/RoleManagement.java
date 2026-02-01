@@ -63,3 +63,12 @@ public class RoleManagement {
         return hasRole(Role.ADMIN, Role.MANAGER);
     }
 
+    private boolean hasRole(Role... allowed) {
+        if (!isLoggedIn()) return false;
+        Role userRole = currentUser.getRole();
+        for (Role r : allowed) {
+            if (userRole == r) return true;
+        }
+        return false;
+    }
+
