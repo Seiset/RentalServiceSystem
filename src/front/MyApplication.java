@@ -110,7 +110,6 @@ public class MyApplication {
         if (roleManagement.showRegisterUserOption()) dynamicOptions.add("7. Register new user");
         if (roleManagement.showFullRentalInfoOption()) dynamicOptions.add("8. Show full rental info");
 
-        // ← Here is the lambda expression
         dynamicOptions.forEach(option -> System.out.println(option));
 
         System.out.println("0. Exit");

@@ -39,7 +39,7 @@ public class RentalService {
             return;
         }
 
-        // All users can rent cars (you can restrict later if needed)
+
         car.setRented(true);
         carRepository.updateCar(car);
 
