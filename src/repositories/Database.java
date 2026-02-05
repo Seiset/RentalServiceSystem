@@ -1,4 +1,3 @@
-
 package repositories;
 
 import java.sql.Connection;
@@ -12,19 +11,22 @@ public class Database {
     private static final String USER = "postgres";
     private static final String PASSWORD = "0000";
 
-    private static Connection connection;
+    private Database() {}
+    private static class Holder {
+        private static final Connection CONNECTION = createConnection();
+    }
 
-    private Database() { }
+    private static Connection createConnection() {
+        try {
+            System.out.println("PostgreSQL connected");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException("DB connection error", e);
+        }
+    }
 
     public static Connection getConnection() {
-        try {
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("PostgreSQL connected");
-            }
-        } catch (SQLException e) {
-            System.out.println("Connection:  " + connection);
-        }
-        return connection;
+        return Holder.CONNECTION;
     }
 }
+
