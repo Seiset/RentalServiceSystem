@@ -53,24 +53,9 @@ public class MyApplication {
             System.out.println("Inсorrect password");
             return;
         }
+
+        System.out.println("Welcome, " +roleManagement.getUserDisplay());
         
-            
-
-                
-        
-
-        System.out.print("Enter your user ID to login: ");
-        int userId = sc.nextInt();
-        sc.nextLine();
-
-        if (!roleManagement.login(userId)) {
-            System.out.println("Login failed – user not found.");
-            System.out.println("Exiting...");
-            return;
-        }
-
-        System.out.println("\nWelcome, " + roleManagement.getUserDisplay() + "!");
-
         while (true) {
             printMenu();
             int option = sc.nextInt();
