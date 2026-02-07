@@ -13,11 +13,11 @@ public class RoleManagement {
         this.userRepository = userRepository;
     }
 
-    public boolean login(int userId) {
+    public boolean login(int id, String password) {
         User user = userRepository.findById(userId);
         if (user == null) return false;
         if (!user.getPassword().trim().equals(password.trim())) return false;
-        currentUser = user
+        currentUser = user;
         System.out.println("Welcome, " + currentUser.getName() + " (" + currentUser.getRole() + ")");
         return true;
     }
@@ -27,7 +27,6 @@ public class RoleManagement {
     }
 
     public String getUserDisplay() {
-        if (!isLoggedIn()) return "Not logged in";
         return currentUser.getName() + " (" + currentUser.getRole() + ")";
     }
 
