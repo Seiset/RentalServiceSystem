@@ -30,19 +30,33 @@ public class MyApplication {
     }
 
     public void run() {
+        while (true) {
+            System.out.println("1. Login");
+            System.out.println("2. Registration");
+            System.out.println("0. Exit");
+            int choice = sc.nextInt();
+            sc.nextLine();
 
-        System.out.print("Enter your user ID to login: ");
-        int userId = sc.nextInt();
-        sc.nextLine();
+            if (choice == 1) login();
+            if (choice == 2) registerUser();
+            if (choice == 0) return;
+        }
+    }
 
-        if (!roleManagement.login(userId)) {
-            System.out.println("Login failed – user not found.");
-            System.out.println("Exiting...");
+    private void login () {
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+        sc.nextLine()
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        if (!roleManagement.login(id, password)) {
+            System.out.println("Incorrect password");
             return;
         }
 
-        System.out.println("\nWelcome, " + roleManagement.getUserDisplay() + "!");
-
+        System.out.println("Welcome, " +roleManagement.getUserDisplay());
+        
         while (true) {
             printMenu();
             int option = sc.nextInt();
@@ -86,6 +100,11 @@ public class MyApplication {
                     else accessDenied();
                 }
 
+                case 9 -> {
+                    if (roleManagement.canRegisterManager()) registerManager();
+                    else accessDenied();
+                }
+
                 case 0 -> {
                     System.out.println("Bye!");
                     return;
@@ -100,24 +119,25 @@ public class MyApplication {
         System.out.println("\n--- CAR RENTAL SYSTEM ---");
         System.out.println("1. Show all cars");
 
-        List<String> dynamicOptions = new ArrayList<>();
+        List<String> options = new ArrayList<>();
 
-        if  ( roleManagement.showAddCarOption()) dynamicOptions.add("2. Add new car");
-        if (roleManagement.showUpdateCarOption())  dynamicOptions.add("3. Update car");
-        if (roleManagement.showDeleteCarOption())  dynamicOptions.add("4. Delete car");
-        if ( roleManagement.showRentCarOption())    dynamicOptions.add("5. Rent a car");
-        if (roleManagement.showReturnCarOption())   dynamicOptions.add("6. Return a car");
-        if (roleManagement.showRegisterUserOption()) dynamicOptions.add("7. Register new user");
-        if (roleManagement.showFullRentalInfoOption()) dynamicOptions.add("8. Show full rental info");
+        if (roleManagement.canAddCarOption()) options.add("2. Add new car");
+        if (roleManagement.canUpdateCarOption()) options.add("3. Update car");
+        if (roleManagement.canDeleteCarOption()) options.add("4. Delete car");
+        if (roleManagement.canRentCarOption()) options.add("5. Rent a car");
+        if (roleManagement.canReturnCarOption()) options.add("6. Return a car");
+        if (roleManagement.canRegisterUserOption()) options.add("7. Register new user");
+        if (roleManagement.canFullRentalInfoOption()) options.add("8. Show full rental info");
+        if (roleManagement.canRegisterManager()) options.add("9. Register manager");
 
-        dynamicOptions.forEach(option -> System.out.println(option));
+        options.forEach(option -> System.out.println(option));
 
-        System.out.println("0. Exit");
+        System.out.println("0. Logout");
         System.out.print("Choose option: ");
     }
 
     private void accessDenied() {
-        System.out.println("Access denied — your role does not allow this action.");
+        System.out.println("Access denied");
     }
 
     private void showAllCars() {
@@ -127,11 +147,9 @@ public class MyApplication {
             return;
         }
 
-        System.out.println("=== Available cars ===");
-
         cars.stream()
                 .filter(car -> !car.isRented())
-                .forEach(car -> System.out.println(" → " + car));
+                .forEach(System.out::println);
     }
 
     private void addCar() {
@@ -139,18 +157,20 @@ public class MyApplication {
         String brand = sc.nextLine();
         System.out.print("Model: ");
         String model = sc.nextLine();
-        System.out.print("Price per day: ");
-        double price = sc.nextDouble(); sc.nextLine();
-        if (price <= 0) { System.out.println("Price must be > 0"); return; }
-        System.out.print("Category: "); String category = sc.nextLine();
-
-        Car car = new Car(0, brand, model, price, category, "AVAILABLE");
-        carRepository.addCar(car);
+        System.out.print("Price: ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Category: ");
+        String category = sc.nextLine();
+    
+        carRepository.addCar(new Car(0, brand, model, price, category, "AVAILABLE"));
         System.out.println("Car added successfully!");
     }
 
     private void updateCar() {
-        System.out.print("Enter car ID to update: "); int id = sc.nextInt(); sc.nextLine();
+        System.out.print("Car ID: "); 
+        int id = sc.nextInt();
+        sc.nextLine();
         Car car = carRepository.findById(id);
         if (car == null) { System.out.println("Car not found."); return; }
 
@@ -183,29 +203,28 @@ public class MyApplication {
     }
 
     private void registerUser() {
-        System.out.print("Name: "); String name = sc.nextLine();
-
-        System.out.println("Choose role:");
-        System.out.println("1 - ADMIN");
-        System.out.println("2 - MANAGER");
-        System.out.println("3 - USER");
-        System.out.print("Enter number (1-3): ");
-
-        int choice = sc.nextInt(); sc.nextLine();
-
-        Role role = switch (choice) {
-            case 1 -> Role.ADMIN;
-            case 2 -> Role.MANAGER;
-            case 3 -> Role.USER;
-            default -> {
-                System.out.println("Invalid choice → defaulting to USER");
-                yield Role.USER;
-            }
-        };
-
-        User user = new User(0, name, role);
-        userRepository.addUser(user);
+        System.out.print("Name: ");
+        String name = sc.nextLine();
+        System.out.print("ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Password: ");
+        String password = sc.nextLine();
+            
+        userRepository.addUser(new User(id, name, Role.USER, password));
         System.out.println("User registered successfully!");
+    }
+
+    private void registerManager() {
+        System.out.print("Enter Manager name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Manager ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        userRepository.addUser(new User(id, name, Role.MANAGER, "1111"));
+        System.out.println("Manager registered with ID " + id + " and password 1111");
     }
 
     private void showFullRentalInfo() {
