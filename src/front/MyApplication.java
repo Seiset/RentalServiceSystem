@@ -99,6 +99,10 @@ public class MyApplication {
                     else accessDenied();
                 }
 
+                case 9 -> {
+                    if (roleManagement.canRegisterManager()) registerManager();
+                    else accessDenied();
+
                 case 0 -> {
                     System.out.println("Bye!");
                     return;
@@ -115,22 +119,23 @@ public class MyApplication {
 
         List<String> dynamicOptions = new ArrayList<>();
 
-        if  ( roleManagement.showAddCarOption()) dynamicOptions.add("2. Add new car");
-        if (roleManagement.showUpdateCarOption())  dynamicOptions.add("3. Update car");
-        if (roleManagement.showDeleteCarOption())  dynamicOptions.add("4. Delete car");
-        if ( roleManagement.showRentCarOption())    dynamicOptions.add("5. Rent a car");
-        if (roleManagement.showReturnCarOption())   dynamicOptions.add("6. Return a car");
-        if (roleManagement.showRegisterUserOption()) dynamicOptions.add("7. Register new user");
-        if (roleManagement.showFullRentalInfoOption()) dynamicOptions.add("8. Show full rental info");
+        if  ( roleManagement.showAddCarOption()) options.add("2. Add new car");
+        if (roleManagement.showUpdateCarOption()) options.add("3. Update car");
+        if (roleManagement.showDeleteCarOption()) options.add("4. Delete car");
+        if ( roleManagement.showRentCarOption()) options.add("5. Rent a car");
+        if (roleManagement.showReturnCarOption()) options.add("6. Return a car");
+        if (roleManagement.showRegisterUserOption()) options.add("7. Register new user");
+        if (roleManagement.showFullRentalInfoOption()) options.add("8. Show full rental info");
+        if (roleManagement.canRegisterManager()) options.add("9. Register manager");
 
-        dynamicOptions.forEach(option -> System.out.println(option));
+        options.forEach(option -> System.out.println(option));
 
-        System.out.println("0. Exit");
+        System.out.println("0. Logout");
         System.out.print("Choose option: ");
     }
 
     private void accessDenied() {
-        System.out.println("Access denied — your role does not allow this action.");
+        System.out.println("Access denied");
     }
 
     private void showAllCars() {
@@ -140,11 +145,9 @@ public class MyApplication {
             return;
         }
 
-        System.out.println("=== Available cars ===");
-
         cars.stream()
                 .filter(car -> !car.isRented())
-                .forEach(car -> System.out.println(" → " + car));
+                .forEach(System.out::println);
     }
 
     private void addCar() {
@@ -152,13 +155,12 @@ public class MyApplication {
         String brand = sc.nextLine();
         System.out.print("Model: ");
         String model = sc.nextLine();
-        System.out.print("Price per day: ");
-        double price = sc.nextDouble(); sc.nextLine();
-        if (price <= 0) { System.out.println("Price must be > 0"); return; }
-        System.out.print("Category: "); String category = sc.nextLine();
-
-        Car car = new Car(0, brand, model, price, category, "AVAILABLE");
-        carRepository.addCar(car);
+        System.out.print("Price: ");
+        double price = sc.nextDouble();
+        System.out.print("Category: ");
+        String category = sc.nextLine();
+    
+        carRepository.addCar(new Car(0, brand, model, price, category, "AVAILABLE"));
         System.out.println("Car added successfully!");
     }
 
