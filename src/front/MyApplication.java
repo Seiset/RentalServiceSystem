@@ -30,6 +30,34 @@ public class MyApplication {
     }
 
     public void run() {
+        while (true) {
+            System.out.println("1. Login");
+            System.out.println("2. Registration");
+            System.out.println("0. Exit");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (choice == 1) login();
+            if (choice == 2) registerUser();
+            if (choice == 0) return;
+        }
+    }
+
+    private void login () {
+        System.out.print("Enter ID: ");
+        int id = sc.nextInt();
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        if (!roleManagement.login(id, password)) {
+            System.out.println("Inсorrect password");
+            return;
+        }
+        
+            
+
+                
+        
 
         System.out.print("Enter your user ID to login: ");
         int userId = sc.nextInt();
