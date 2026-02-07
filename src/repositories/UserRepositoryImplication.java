@@ -17,7 +17,7 @@ public class UserRepositoryImplication implements UserRepository {
    @Override
     public void addUser(User user) {
         try {
-            String sql = "INSERT INTO users (name, role) VALUES (?, ?)";
+            String sql = "INSERT INTO users (name, role,password) VALUES (?, ? , ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getName());
             ps.setString(2, user.getRole().name());
@@ -47,22 +47,5 @@ public class UserRepositoryImplication implements UserRepository {
         return null;
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-            while (rs.next()) {
-                users.add(new User(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        Role.fromString(rs.getString("role"))
-                ));
-              }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
+
 }        
