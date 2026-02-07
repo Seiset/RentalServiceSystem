@@ -46,7 +46,7 @@ public class MyApplication {
     private void login () {
         System.out.print("Enter ID: ");
         int id = sc.nextInt();
-        sc.nextLine()
+        sc.nextLine();
         System.out.print("Enter password: ");
         String password = sc.nextLine();
 
