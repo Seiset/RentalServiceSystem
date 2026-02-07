@@ -14,7 +14,7 @@ public class RoleManagement {
     }
 
     public boolean login(int id, String password) {
-        User user = userRepository.findById(userId);
+        User user = userRepository.findById(id);
         if (user == null) return false;
         if (!user.getPassword().trim().equals(password.trim())) return false;
         currentUser = user;

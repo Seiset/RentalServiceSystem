@@ -46,7 +46,7 @@ public class MyApplication {
     private void login () {
         System.out.print("Enter ID: ");
         int id = sc.nextInt();
-        sc.nextLine()
+        sc.nextLine();
         System.out.print("Enter password: ");
         String password = sc.nextLine();
 
@@ -121,13 +121,13 @@ public class MyApplication {
 
         List<String> options = new ArrayList<>();
 
-        if (roleManagement.canAddCarOption()) options.add("2. Add new car");
-        if (roleManagement.canUpdateCarOption()) options.add("3. Update car");
-        if (roleManagement.canDeleteCarOption()) options.add("4. Delete car");
-        if (roleManagement.canRentCarOption()) options.add("5. Rent a car");
-        if (roleManagement.canReturnCarOption()) options.add("6. Return a car");
-        if (roleManagement.canRegisterUserOption()) options.add("7. Register new user");
-        if (roleManagement.canFullRentalInfoOption()) options.add("8. Show full rental info");
+        if (roleManagement.canAddCar()) options.add("2. Add new car");
+        if (roleManagement.canUpdateCar()) options.add("3. Update car");
+        if (roleManagement.canDeleteCar()) options.add("4. Delete car");
+        if (roleManagement.canRentCar()) options.add("5. Rent a car");
+        if (roleManagement.canReturnCar()) options.add("6. Return a car");
+        if (roleManagement.canRegisterUser()) options.add("7. Register new user");
+        if (roleManagement.canViewFullRentalInfo()) options.add("8. Show full rental info");
         if (roleManagement.canRegisterManager()) options.add("9. Register manager");
 
         options.forEach(option -> System.out.println(option));

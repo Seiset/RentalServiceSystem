@@ -38,7 +38,8 @@ public class UserRepositoryImplication implements UserRepository {
                 return new User(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        Role.fromString(rs.getString("role"))
+                        Role.fromString(rs.getString("role")),
+                        rs.getString("password")
                 );
             }
          } catch (SQLException e) {
