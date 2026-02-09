@@ -207,3 +207,7 @@ public class MyApplication {
         new repositories.RentalRepositoryImplication().showFullRentalInfo();
     }
 }
+
+
+
+/// //
