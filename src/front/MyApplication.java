@@ -1,9 +1,9 @@
 package front;
 
-import models.Car;
-import models.User;
-import models.Role;
 import controllers.RentalService;
+import models.Car;
+import models.Role;
+import models.User;
 import repositories.CarRepository;
 import repositories.UserRepository;
 
@@ -16,9 +16,8 @@ public class MyApplication {
     private final CarRepository carRepository;
     private final RentalService rentalService;
     private final UserRepository userRepository;
-    private final Scanner sc = new Scanner(System.in);
-
     private final RoleManagement roleManagement;
+    private final Scanner sc = new Scanner(System.in);
 
     public MyApplication(CarRepository carRepository,
                          RentalService rentalService,
@@ -43,7 +42,7 @@ public class MyApplication {
         }
     }
 
-    private void login () {
+    private void login() {
         System.out.print("Enter ID: ");
         int id = sc.nextInt();
         sc.nextLine();
@@ -51,12 +50,12 @@ public class MyApplication {
         String password = sc.nextLine();
 
         if (!roleManagement.login(id, password)) {
-            System.out.println("Incorrect password");
+            System.out.println("Inсorrect password");
             return;
         }
 
-        System.out.println("Welcome, " +roleManagement.getUserDisplay());
-        
+        System.out.println("Welcome, " + roleManagement.getUserDisplay());
+
         while (true) {
             printMenu();
             int option = sc.nextInt();
@@ -64,53 +63,16 @@ public class MyApplication {
 
             switch (option) {
                 case 1 -> showAllCars();
-
-                case 2 -> {
-                    if (roleManagement.canAddCar()) addCar();
-                    else accessDenied();
-                }
-
-                case 3 -> {
-                    if (roleManagement.canUpdateCar()) updateCar();
-                    else accessDenied();
-                }
-
-                case 4 -> {
-                    if (roleManagement.canDeleteCar()) deleteCar();
-                    else accessDenied();
-                }
-
-                case 5 -> {
-                    if (roleManagement.canRentCar()) rentCarMenu();
-                    else accessDenied();
-                }
-
-                case 6 -> {
-                    if (roleManagement.canReturnCar()) returnCarMenu();
-                    else accessDenied();
-                }
-
-                case 7 -> {
-                    if (roleManagement.canRegisterUser()) registerUser();
-                    else accessDenied();
-                }
-
-                case 8 -> {
-                    if (roleManagement.canViewFullRentalInfo()) showFullRentalInfo();
-                    else accessDenied();
-                }
-
-                case 9 -> {
-                    if (roleManagement.canRegisterManager()) registerManager();
-                    else accessDenied();
-                }
-
-                case 0 -> {
-                    System.out.println("Bye!");
-                    return;
-                }
-
-                default -> System.out.println("Invalid option!");
+                case 2 -> { if (roleManagement.canAddCar()) addCar(); else accessDenied(); }
+                case 3 -> { if (roleManagement.canUpdateCar()) updateCar(); else accessDenied(); }
+                case 4 -> { if (roleManagement.canDeleteCar()) deleteCar(); else accessDenied(); }
+                case 5 -> { if (roleManagement.canRentCar()) rentCar(); else accessDenied(); }
+                case 6 -> { if (roleManagement.canReturnCar()) returnCar(); else accessDenied(); }
+                case 7 -> { if (roleManagement.canRegisterUser()) registerUser(); else accessDenied(); }
+                case 8 -> { if (roleManagement.canViewFullRentalInfo()) showFullRentalInfo(); else accessDenied(); }
+                case 9 -> { if (roleManagement.canRegisterManager()) registerManager(); else accessDenied(); }
+                case 0 -> { return; }
+                default -> System.out.println("Invalid option");
             }
         }
     }
@@ -126,11 +88,11 @@ public class MyApplication {
         if (roleManagement.canDeleteCar()) options.add("4. Delete car");
         if (roleManagement.canRentCar()) options.add("5. Rent a car");
         if (roleManagement.canReturnCar()) options.add("6. Return a car");
-        if (roleManagement.canRegisterUser()) options.add("7. Register new user");
+        if (roleManagement.canRegisterUser()) options.add("7. Register user");
         if (roleManagement.canViewFullRentalInfo()) options.add("8. Show full rental info");
         if (roleManagement.canRegisterManager()) options.add("9. Register manager");
 
-        options.forEach(option -> System.out.println(option));
+        options.forEach(System.out::println);
 
         System.out.println("0. Logout");
         System.out.print("Choose option: ");
@@ -143,7 +105,7 @@ public class MyApplication {
     private void showAllCars() {
         var cars = carRepository.getAllCars();
         if (cars.isEmpty()) {
-            System.out.println("No cars available.");
+            System.out.println("No cars available");
             return;
         }
 
@@ -161,44 +123,58 @@ public class MyApplication {
         double price = sc.nextDouble();
         sc.nextLine();
         System.out.print("Category: ");
-        String category = sc.nextLine();
-    
+        String category = sc.nextLine().trim();
+        if (category.isEmpty()) {
+            System.out.println("Category cannot be empty!");
+            return;
+        }
+
         carRepository.addCar(new Car(0, brand, model, price, category, "AVAILABLE"));
-        System.out.println("Car added successfully!");
+        System.out.println("Car added");
     }
 
     private void updateCar() {
-        System.out.print("Car ID: "); 
+        System.out.print("Car ID: ");
         int id = sc.nextInt();
         sc.nextLine();
         Car car = carRepository.findById(id);
-        if (car == null) { System.out.println("Car not found."); return; }
+        if (car == null) return;
 
-        System.out.print("New brand: "); String brand = sc.nextLine();
-        System.out.print("New model: "); String model = sc.nextLine();
-        System.out.print("New price: "); double price = sc.nextDouble(); sc.nextLine();
-        System.out.print("New category: "); String category = sc.nextLine();
-        System.out.print("New status (AVAILABLE/RENTED): "); String status = sc.nextLine();
+        System.out.print("Brand: ");
+        String brand = sc.nextLine();
+        System.out.print("Model: ");
+        String model = sc.nextLine();
+        System.out.print("Price: ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Category: ");
+        String category = sc.nextLine();
+        System.out.print("Status (AVAILABLE/RENTED): ");
+        String status = sc.nextLine();
 
-        Car updated = new Car(id, brand, model, price, category, status);
-        carRepository.updateCar(updated);
-        System.out.println("Car updated successfully!");
+        carRepository.updateCar(new Car(id, brand, model, price, category, status));
+        System.out.println("Car updated");
     }
 
     private void deleteCar() {
-        System.out.print("Enter car ID to delete: ");
-        int id = sc.nextInt(); sc.nextLine();
+        System.out.print("Car ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
         carRepository.deleteCar(id);
-        System.out.println("Car deleted.");
+        System.out.println("Car deleted");
     }
 
-    private void rentCarMenu() {
-        System.out.print("Car ID to rent: "); int carId = sc.nextInt(); sc.nextLine();
+    private void rentCar() {
+        System.out.print("Car ID: ");
+        int carId = sc.nextInt();
+        sc.nextLine();
         rentalService.rentCar(carId, roleManagement.getCurrentUser().getId());
     }
 
-    private void returnCarMenu() {
-        System.out.print("Car ID to return: "); int carId = sc.nextInt(); sc.nextLine();
+    private void returnCar() {
+        System.out.print("Car ID: ");
+        int carId = sc.nextInt();
+        sc.nextLine();
         rentalService.returnCar(carId, roleManagement.getCurrentUser().getId());
     }
 
@@ -210,9 +186,9 @@ public class MyApplication {
         sc.nextLine();
         System.out.print("Password: ");
         String password = sc.nextLine();
-            
+
         userRepository.addUser(new User(id, name, Role.USER, password));
-        System.out.println("User registered successfully!");
+        System.out.println("User registered");
     }
 
     private void registerManager() {

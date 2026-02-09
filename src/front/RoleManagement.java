@@ -18,7 +18,6 @@ public class RoleManagement {
         if (user == null) return false;
         if (!user.getPassword().trim().equals(password.trim())) return false;
         currentUser = user;
-        System.out.println("Welcome, " + currentUser.getName() + " (" + currentUser.getRole() + ")");
         return true;
     }
 
@@ -43,7 +42,7 @@ public class RoleManagement {
     }
 
     public boolean canRentCar() {
-       return currentUser.getRole() == Role.ADMIN || currentUser.getRole() == Role.USER;
+        return currentUser.getRole() == Role.ADMIN || currentUser.getRole() == Role.USER;
     }
 
     public boolean canReturnCar() {
@@ -55,7 +54,7 @@ public class RoleManagement {
     }
 
     public boolean canViewFullRentalInfo() {
-       return currentUser.getRole() == Role.ADMIN || currentUser.getRole() == Role.MANAGER;
+        return currentUser.getRole() == Role.ADMIN || currentUser.getRole() == Role.MANAGER;
     }
 
     public boolean canRegisterManager() {

@@ -3,8 +3,6 @@ package repositories;
 import models.User;
 import models.Role;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserRepositoryImplication implements UserRepository {
 
@@ -14,15 +12,16 @@ public class UserRepositoryImplication implements UserRepository {
         conn = Database.getConnection();
     }
 
-   @Override
+    @Override
     public void addUser(User user) {
         try {
-            String sql = "INSERT INTO users (name, role,password) VALUES (?, ? , ?)";
+            String sql = "INSERT INTO users (id, name, role, password) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getRole().name());
+            ps.setInt(1, user.getId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getRole().name());
+            ps.setString(4, user.getPassword());
             ps.executeUpdate();
-            System.out.println("User added: " + user.getName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -31,7 +30,7 @@ public class UserRepositoryImplication implements UserRepository {
     @Override
     public User findById(int id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -42,11 +41,9 @@ public class UserRepositoryImplication implements UserRepository {
                         rs.getString("password")
                 );
             }
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-
-}        
+}
